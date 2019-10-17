@@ -29,7 +29,7 @@ public class Main extends Application {
         Textfield.getChildren().add(input);
         mainLayout.setTop(Textfield);
 
-        input.setPrefHeight(50);
+        input.setPrefHeight(100);
         input.setPrefWidth(400);
 
         GridPane buttonPane = new GridPane();
