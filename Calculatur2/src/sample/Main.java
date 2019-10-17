@@ -19,7 +19,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         mainLayout = new BorderPane();
 
-        Scene scene = new Scene(mainLayout, 400, 500);
+        Scene scene = new Scene(mainLayout, 400, 450);
         primaryStage.setTitle("Calculator");
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -35,9 +35,10 @@ public class Main extends Application {
         GridPane buttonPane = new GridPane();
 
         Button[] buttons = {
-            new Button("1"), new Button("2"), new Button("3"), new Button("+"),
-            new Button("4"), new Button("5"), new Button("6"), new Button("-"),
-            new Button("7"), new Button("8"), new Button("9"), new Button("=")
+            new Button("1"), new Button("2"), new Button("3"), new Button("x"),
+            new Button("4"), new Button("5"), new Button("6"), new Button("/"),
+            new Button("7"), new Button("8"), new Button("9"), new Button("+"),
+            new Button("0"), new Button(","), new Button("="), new Button("-")
         };
 
         for (int i = 0; i < buttons.length; i++){
@@ -56,6 +57,10 @@ public class Main extends Application {
         HBox rowThree = new HBox();
         rowThree.getChildren().addAll(buttons[8], buttons[9], buttons[10], buttons [11]);
         buttonPane.add(rowThree, 0,2);
+
+        HBox rowFour = new HBox();
+        rowFour.getChildren().addAll(buttons[12], buttons[13], buttons[14], buttons[15]);
+        buttonPane.add(rowFour,0,3);
 
         mainLayout.setCenter(buttonPane);
     }
