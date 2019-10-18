@@ -1,6 +1,8 @@
 package sample;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -44,6 +46,31 @@ public class Main extends Application {
         for (int i = 0; i < buttons.length; i++){
             buttons[i].setMinHeight(100);
             buttons[i].setMinWidth(100);
+            String textValue = buttons[i].getText();
+
+            buttons[i].setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent actionEvent) {
+                    if(textValue != "="){
+                        if(textValue == "," || "+" || "-" || "x" || "/" ){
+                            if(!()){
+
+                                //Om senaste karaktären INTE är + - x eller /. Strunta då i detta
+
+                                input.setText(input.getText() + textValue);
+                            }
+                        }else {
+                            input.setText(input.getText() + textValue);
+                        }
+                    }else{
+
+                        //Räkna ut koden/metoden.
+
+                    }
+
+                }
+            });
+
         };
 
         HBox rowOne = new HBox();
