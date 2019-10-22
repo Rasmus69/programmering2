@@ -11,9 +11,14 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+
+
 public class Main extends Application {
+
     static BorderPane mainLayout;
     public static void main(String[] args){
+
         launch(args);
     };
 
@@ -43,34 +48,37 @@ public class Main extends Application {
             new Button("0"), new Button(","), new Button("="), new Button("-")
         };
 
+        ArrayList<String> list = new ArrayList<>();
+
         for (int i = 0; i < buttons.length; i++){
             buttons[i].setMinHeight(100);
             buttons[i].setMinWidth(100);
             String textValue = buttons[i].getText();
 
+
             buttons[i].setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent actionEvent) {
                     if(textValue != "="){
-                        if(textValue == "," || "+" || "-" || "x" || "/" ){
-                            if(!()){
-
-                                //Om senaste karaktären INTE är + - x eller /. Strunta då i detta
-
+                        if(textValue.equals(",") || textValue.equals("+") || textValue.equals("-") || textValue.equals("x") || textValue.equals("/") ){
+                            if(input.getText().charAt(input.getText().length() - 1) == ',' ||
+                                    input.getText().charAt(input.getText().length() - 1) == '+' ||
+                                    input.getText().charAt(input.getText().length() - 1) == '-' ||
+                                    input.getText().charAt(input.getText().length() - 1) == 'x' ||
+                                    input.getText().charAt(input.getText().length() - 1) == '/'){
+                            }else{
                                 input.setText(input.getText() + textValue);
                             }
                         }else {
                             input.setText(input.getText() + textValue);
                         }
-                    }else{
+                    }else {
 
                         //Räkna ut koden/metoden.
 
                     }
-
                 }
             });
-
         };
 
         HBox rowOne = new HBox();
