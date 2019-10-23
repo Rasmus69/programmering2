@@ -30,6 +30,7 @@ public class Main extends Application {
         primaryStage.setTitle("Calculator");
         primaryStage.setScene(scene);
         primaryStage.show();
+        primaryStage.setResizable(false);
 
         HBox Textfield = new HBox();
         TextField input = new TextField();
@@ -73,6 +74,9 @@ public class Main extends Application {
                             input.setText(input.getText() + textValue);
                         }
                     }else {
+                        switch("="){
+                            case "+":
+                        }
 
                         //Räkna ut koden/metoden.
 
