@@ -74,11 +74,11 @@ public class Main extends Application {
                             input.setText(input.getText() + textValue);
                         }
                     }else {
-                        switch("="){
-                            case "+":
-                        }
 
-                        //Räkna ut koden/metoden.
+                            String s = input.getText();
+                            char c = s.charAt(0);
+                            s.toCharArray();
+                            System.out.println("Första = " + c);
 
                     }
                 }
