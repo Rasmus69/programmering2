@@ -54,23 +54,15 @@ public class Main extends Application {
 
         for (int i = 0; i < buttons.length; i++){
             Button button = buttons[i];
-            if(button.getText() == "AC" || button.getText() == "," || button.getText() == "x" || button.getText() == "7" || button.getText() == "+" ||
-            button.getText() == "-" || button.getText() == "=" || button.getText() == "0");
-        }
 
-        for (int i = 0; i < buttons.length; i++){
-            Button button = buttons[i];
-
-
-            if(button.getText() == "0" || button.getText() == "=" || button.getText() == "AC") {
-                button.setMinHeight(100);
-                button.setMinWidth(200);
+            if(button.getText() == "AC" || button.getText() == "," || button.getText() == "x" || button.getText() == "/" ||
+               button.getText() == "+" || button.getText() == "-" || button.getText() == "=" || button.getText() == "0"){
                 button.setStyle("-fx-background-color:#adadad; -fx-border-color:#8c8c8c; -fx-border-width: 1px;");
 
                 button.onMousePressedProperty().set(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent mouseEvent) {
-                        button.setStyle("-fx-background-color:#444444; -fx-border-color:#8c8c8c; -fx-border-width: 1px;");
+                        button.setStyle("-fx-background-color:#adadad; -fx-border-color:#00C0E6; -fx-border-width: 1px;");
 
                     }
                 });
@@ -81,6 +73,11 @@ public class Main extends Application {
                         button.setStyle("-fx-background-color:#adadad; -fx-border-color:#8c8c8c; -fx-border-width: 1px;");
                     }
                 });
+            }
+
+            if(button.getText() == "0" || button.getText() == "=" || button.getText() == "AC") {
+                button.setMinHeight(100);
+                button.setMinWidth(200);
 
             } else {
                 button.setMinHeight(100);
