@@ -6,7 +6,6 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
@@ -59,15 +58,15 @@ public class Main extends Application {
                button.getText() == "+" || button.getText() == "-" || button.getText() == "=" || button.getText() == "0"){
                 button.setStyle("-fx-background-color:#adadad; -fx-border-color:#8c8c8c; -fx-border-width: 1px;");
 
-                button.onMousePressedProperty().set(new EventHandler<MouseEvent>() {
+                button.onMouseEnteredProperty().set(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent mouseEvent) {
-                        button.setStyle("-fx-background-color:#adadad; -fx-border-color:#00C0E6; -fx-border-width: 1px;");
+                        button.setStyle("-fx-background-color:#C3C3C3; -fx-border-color:#00C0E6; -fx-border-width: 1.5px;");
 
                     }
                 });
 
-                button.onMouseReleasedProperty().set(new EventHandler<MouseEvent>() {
+                button.onMouseExitedProperty().set(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent mouseEvent) {
                         button.setStyle("-fx-background-color:#adadad; -fx-border-color:#8c8c8c; -fx-border-width: 1px;");
@@ -119,10 +118,11 @@ public class Main extends Application {
                         System.out.println("String1 = " + Subs);
                         System.out.println("String2 = " + Subs2);
                         System.out.println("Res = " + res);
+
                     } else if(textValue == "AC") {
                         input.setText("");
-                    }
-                    else {
+
+                    } else {
                         if(textValue.equals(",") || textValue.equals("+") || textValue.equals("-") || textValue.equals("x") || textValue.equals("/") ){
                             if(input.getText().charAt(input.getText().length() - 1) == ',' ||
                                     input.getText().charAt(input.getText().length() - 1) == '+' ||
