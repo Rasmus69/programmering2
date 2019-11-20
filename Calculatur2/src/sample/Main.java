@@ -15,7 +15,16 @@ import java.util.ArrayList;
 
 public class Main extends Application {
 
-    static BorderPane mainLayout;
+    BorderPane mainLayout;
+    HBox inputLayout;
+    TextField input;
+    Button[] buttons;
+    HBox inputrowOne;
+    HBox inputrowTwo;
+    HBox inputrowThree;
+    HBox inputrowFour;
+    HBox inputrowFive;
+
     public static void main(String[] args){
 
         launch(args);
@@ -31,31 +40,41 @@ public class Main extends Application {
         primaryStage.show();
         primaryStage.setResizable(false);
 
-        HBox Textfield = new HBox();
-        TextField input = new TextField();
-        Textfield.getChildren().add(input);
-        mainLayout.setTop(Textfield);
+        inputLayout = new HBox();
+        input = new TextField();
+        inputLayout.getChildren().add(input);
+        mainLayout.setTop(inputLayout);
+        input.setEditable(false);
 
         input.setPrefHeight(50);
         input.setPrefWidth(400);
 
-        GridPane buttonPane = new GridPane();
-
-        Button[] buttons = {
-            new Button("AC"), new Button(","), new Button("x"),
-            new Button("1"), new Button("2"), new Button("3"), new Button("/"),
-            new Button("4"), new Button("5"), new Button("6"), new Button("+"),
-            new Button("7"), new Button("8"), new Button("9"), new Button("-"),
-            new Button("="), new Button("0")
-        };
+        createButtons();
 
         ArrayList<String> list = new ArrayList<>();
 
+        setupButtons();
+
+        setupStyle();
+
+    }
+
+    private void createButtons() {
+        buttons = new Button[]{
+                new Button("AC"), new Button(","), new Button("x"),
+                new Button("1"), new Button("2"), new Button("3"), new Button("/"),
+                new Button("4"), new Button("5"), new Button("6"), new Button("+"),
+                new Button("7"), new Button("8"), new Button("9"), new Button("-"),
+                new Button("="), new Button("0")
+        };
+    }
+
+    private void setupButtons() {
         for (int i = 0; i < buttons.length; i++){
             Button button = buttons[i];
 
             if(button.getText() == "AC" || button.getText() == "," || button.getText() == "x" || button.getText() == "/" ||
-               button.getText() == "+" || button.getText() == "-" || button.getText() == "=" || button.getText() == "0"){
+                    button.getText() == "+" || button.getText() == "-" || button.getText() == "=" || button.getText() == "0"){
                 button.setStyle("-fx-background-color:#adadad; -fx-border-color:#8c8c8c; -fx-border-width: 1px;");
 
                 button.onMouseEnteredProperty().set(new EventHandler<MouseEvent>() {
@@ -106,9 +125,9 @@ public class Main extends Application {
                         }
 
                         s = s.replace(',', '.');
-
                         String Subs = s.substring(0,index);
                         String Subs2 = s.substring(index + 1, s.length());
+                        //Skriv om så den kan läsa in fler än ett tal i taget. änvänd split
                         double res = calc(Subs, Subs2, op );
 
                         String output = Double.toString(res);
@@ -124,11 +143,12 @@ public class Main extends Application {
 
                     } else {
                         if(textValue.equals(",") || textValue.equals("+") || textValue.equals("-") || textValue.equals("x") || textValue.equals("/") ){
-                            if(input.getText().charAt(input.getText().length() - 1) == ',' ||
+                            if(input.getText().length() > 0 && (input.getText().charAt(input.getText().length() - 1) == ',' ||
+                                    //Fixa så det inte går o skriva något annat än en siffra innan.
                                     input.getText().charAt(input.getText().length() - 1) == '+' ||
                                     input.getText().charAt(input.getText().length() - 1) == '-' ||
                                     input.getText().charAt(input.getText().length() - 1) == 'x' ||
-                                    input.getText().charAt(input.getText().length() - 1) == '/'){
+                                    input.getText().charAt(input.getText().length() - 1) == '/')){
                             }else{
                                 input.setText(input.getText() + textValue);
                             }
@@ -139,26 +159,31 @@ public class Main extends Application {
                 }
             });
         };
+    }
 
-        HBox rowOne = new HBox();
-        rowOne.getChildren().addAll(buttons[0], buttons[1], buttons[2]);
-        buttonPane.add(rowOne, 0,0);
+    private void setupStyle() {
 
-        HBox rowTwo = new HBox();
-        rowTwo.getChildren().addAll(buttons[3], buttons[4], buttons[5], buttons[6]);
-        buttonPane.add(rowTwo, 0,1);
+        GridPane buttonPane = new GridPane();
 
-        HBox rowThree = new HBox();
-        rowThree.getChildren().addAll(buttons[7], buttons[8], buttons[9], buttons [10]);
-        buttonPane.add(rowThree, 0,2);
+        inputrowOne = new HBox();
+        inputrowOne.getChildren().addAll(buttons[0], buttons[1], buttons[2]);
+        buttonPane.add(inputrowOne, 0,0);
 
-        HBox rowFour = new HBox();
-        rowFour.getChildren().addAll(buttons[11], buttons[12], buttons[13], buttons[14]);
-        buttonPane.add(rowFour,0,3);
+        inputrowTwo = new HBox();
+        inputrowTwo.getChildren().addAll(buttons[3], buttons[4], buttons[5], buttons[6]);
+        buttonPane.add(inputrowTwo, 0,1);
 
-        HBox rowFive = new HBox();
-        rowFive.getChildren().addAll(buttons[15], buttons[16]);
-        buttonPane.add(rowFive,0,4);
+        inputrowThree = new HBox();
+        inputrowThree.getChildren().addAll(buttons[7], buttons[8], buttons[9], buttons [10]);
+        buttonPane.add(inputrowThree, 0,2);
+
+        inputrowFour = new HBox();
+        inputrowFour.getChildren().addAll(buttons[11], buttons[12], buttons[13], buttons[14]);
+        buttonPane.add(inputrowFour,0,3);
+
+        inputrowFive = new HBox();
+        inputrowFive.getChildren().addAll(buttons[15], buttons[16]);
+        buttonPane.add(inputrowFive,0,4);
 
         mainLayout.setCenter(buttonPane);
     }
