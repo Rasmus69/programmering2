@@ -10,9 +10,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
-import java.util.ArrayList;
-
-
 public class Main extends Application {
 
     BorderPane mainLayout;
@@ -51,13 +48,12 @@ public class Main extends Application {
 
         createButtons();
 
-        ArrayList<String> list = new ArrayList<>();
-
         setupButtons();
 
         setupStyle();
 
     }
+
 
     private void createButtons() {
         buttons = new Button[]{
@@ -72,7 +68,7 @@ public class Main extends Application {
     private void setupButtons() {
         for (int i = 0; i < buttons.length; i++){
             Button button = buttons[i];
-
+            //Här ger jag några specefika knappar en lite mörkare grå färg.
             if(button.getText() == "AC" || button.getText() == "," || button.getText() == "x" || button.getText() == "/" ||
                     button.getText() == "+" || button.getText() == "-" || button.getText() == "=" || button.getText() == "0"){
                 button.setStyle("-fx-background-color:#adadad; -fx-border-color:#8c8c8c; -fx-border-width: 1px;");
@@ -92,7 +88,7 @@ public class Main extends Application {
                     }
                 });
             }
-
+            //Här ger jag tre knappar en större width än resten av knapparna.
             if(button.getText() == "0" || button.getText() == "=" || button.getText() == "AC") {
                 button.setMinHeight(100);
                 button.setMinWidth(200);
@@ -123,20 +119,16 @@ public class Main extends Application {
 
                             }
                         }
-
+                        //skriver om "," till ".".
                         s = s.replace(',', '.');
                         String Subs = s.substring(0,index);
                         String Subs2 = s.substring(index + 1, s.length());
-                        //Skriv om så den kan läsa in fler än ett tal i taget. änvänd split
                         double res = calc(Subs, Subs2, op );
 
                         String output = Double.toString(res);
+                        //skriver om "." till ",".
                         output = output.replace('.', ',');
                         input.setText(output);
-
-                        System.out.println("String1 = " + Subs);
-                        System.out.println("String2 = " + Subs2);
-                        System.out.println("Res = " + res);
 
                     } else if(textValue == "AC") {
                         input.setText("");
@@ -144,11 +136,13 @@ public class Main extends Application {
                     } else {
                         if(textValue.equals(",") || textValue.equals("+") || textValue.equals("-") || textValue.equals("x") || textValue.equals("/") ){
                             if(input.getText().length() > 0 && (input.getText().charAt(input.getText().length() - 1) == ',' ||
-                                    //Fixa så det inte går o skriva något annat än en siffra innan.
                                     input.getText().charAt(input.getText().length() - 1) == '+' ||
                                     input.getText().charAt(input.getText().length() - 1) == '-' ||
                                     input.getText().charAt(input.getText().length() - 1) == 'x' ||
                                     input.getText().charAt(input.getText().length() - 1) == '/')){
+
+                            }else if (input.getText().length() == 0){
+
                             }else{
                                 input.setText(input.getText() + textValue);
                             }
@@ -187,19 +181,19 @@ public class Main extends Application {
 
         mainLayout.setCenter(buttonPane);
     }
-
-    public static double calc (String n1 , String n2 , char op){
-        switch (op) {
-            case '+' :
-                return Double.parseDouble(n1) + Double.parseDouble(n2);
-            case '-' :
-                return Double.parseDouble(n1) - Double.parseDouble(n2);
-            case 'x' :
-                return Double.parseDouble(n1) * Double.parseDouble(n2);
-            case '/' :
-                return Double.parseDouble(n1) / Double.parseDouble(n2);
-            default :
-                return 0;
+        //Här är min metod som omvänlar måna Strings till double och sen utför operationen.
+        public static double calc (String n1, String n2 ,char op){
+            switch (op) {
+                case '+':
+                    return Double.parseDouble(n1) + Double.parseDouble(n2);
+                case '-':
+                    return Double.parseDouble(n1) - Double.parseDouble(n2);
+                case 'x':
+                    return Double.parseDouble(n1) * Double.parseDouble(n2);
+                case '/':
+                    return Double.parseDouble(n1) / Double.parseDouble(n2);
+                default:
+                    return 0;
         }
     }
 }
